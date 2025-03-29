@@ -1,0 +1,37 @@
+{
+  "configurationName": "sampleCsv",
+  "recordNumber": 23,
+  "attributes": [
+    {
+      "columnName": "rec_no",
+      "datatype": "sequence",
+      "description": "Is the record number",
+      "businessName": "Record Number"
+    },
+    {
+      "columnName": "full_name",
+      "datatype": "string",
+      "description": "User's Full Name",
+      "businessName": "Full Name"
+    },
+    {
+      "columnName": "address_line1",
+      "datatype": "string",
+      "description": "User's address line 1",
+      "businessName": "address line 1"
+    },
+    {
+      "columnName": "city",
+      "datatype": "string",
+      "description": "User's city",
+      "businessName": "city"
+    },
+    {
+      "columnName": "zip_code",
+      "datatype": "number",
+      "description": "User's city zip code",
+      "businessName": "zip code"
+    }
+  ]
+}
+

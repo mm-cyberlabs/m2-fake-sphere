@@ -28,4 +28,7 @@ def handle_choice(choice):
         print("Invalid choice. Please try again.")
 
 def handle_choice1():
+    log = logging.getLogger()
+    log.info("Choice 1 was chosen by the user.")
+
     

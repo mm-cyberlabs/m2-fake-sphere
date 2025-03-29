@@ -3,7 +3,7 @@
 # python -m spacy download en_core_web_sm
 
 from db_connector import DatabaseConnector
-from schema_analyzer import SchemaAnalyzer
+from bkp.schema_analyzer import SchemaAnalyzer
 from data_generator import DataGenerator
 from data_saver import DataSaver
 
