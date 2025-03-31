@@ -4,10 +4,6 @@ from enum import Enum, auto
 from faker import Faker
 
 
-class Datatype(Enum):
-    SEQUENCE = auto()
-
-
 class FakeDataGenerator:
 
     def __init__(self, number_records, current_record_number, config_file):
@@ -40,14 +36,6 @@ class FakeDataGenerator:
             bus_name = attribute["businessName"]
             bus_name = bus_name.replace(" ", "_").lower()
             print(bus_name)
-
-            # This is only to maintain a single sequence, like an index. If more than one
-            # sequence is needed, then a different solution needs to be done.
-            if datatype.upper() == Datatype.SEQUENCE.name:
-                if col_name not in self.sequences:
-                    self.sequences[col_name] = 0;
-                self.sequences[col_name] += 1;
-                print(f"{col_name} = seq: {self.sequences[col_name]}")
 
 
 if __name__ == '__main__':
