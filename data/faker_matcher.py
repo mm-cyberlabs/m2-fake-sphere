@@ -19,7 +19,7 @@ def _extract_faker_callables():
     """
     faker_methods = []
     for attr in dir(fake):
-
+        # Avoid non-callable functions or internal Faker functions.
         if attr.startswith('_') or attr == 'seed':
             continue
 
@@ -87,5 +87,6 @@ if __name__ == '__main__':
     for entry in config["attributes"]:
         obj = FakerDataMatcher(entry["businessName"], entry["datatype"])
         object_list.append(obj)
+        fake.first_name() + fake.last_name()
 
     FakerDataMatcher.match(*object_list)
