@@ -16,15 +16,15 @@ def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
-# Helper function to print current pages and their statuses in an appealing format
 def print_pages_status():
+    # Clear terminal before printing updated status
     clear_terminal()
     header = "=== Scraper Status ==="
     print(header)
     for i, (page, status) in enumerate(pages_status.items(), 1):
         print(f"{i:3}. {page} : {status}")
     print("=" * len(header))
-    print()  # Add a blank line
+    print()  # Blank line
 
 
 visited = set()  # Track visited URLs to avoid repeats
@@ -55,7 +55,7 @@ def scrape(url, domain):
         print(f"Error retrieving {url}: {e}")
         return
 
-    pbar.update(1)  # Update progress bar for each scraped page
+    pbar.update(1)  # Update progress bar
 
     # Convert the full HTML response to Markdown
     markdown_content = md(response.text)
@@ -84,7 +84,7 @@ if __name__ == "__main__":
     base_url = "https://faker.readthedocs.io/en/master/providers.html"
     domain = "faker.readthedocs.io"
 
-    # Clear the Markdown output file at the start
+    # Overwrite the Markdown output file at the start
     with open("documentation.md", "w", encoding="utf-8") as f:
         pass
 
