@@ -54,22 +54,6 @@ def clean_markdown(md_text):
     return md_text
 
 
-def clear_terminal():
-    """Clear terminal output for cleaner CLI display."""
-    os.system('cls' if os.name == 'nt' else 'clear')
-
-
-def print_control_status(control_index):
-    """Display the current scraping status."""
-    clear_terminal()
-    header = "=== Scraper Control Status ==="
-    print(header)
-    for i, (page, status) in enumerate(control_index.items(), 1):
-        print(f"{i:3}. {page} : {status}")
-    print("=" * len(header))
-    print()
-
-
 def generate_filename(url):
     """Generate a safe filename from the URL path."""
     parsed = urlparse(url)
@@ -183,7 +167,7 @@ if __name__ == "__main__":
     genindex_url = "https://faker.readthedocs.io/en/master/genindex.html"
     domain = "faker.readthedocs.io"
 
-    folder_name = "faker_" + datetime.now().strftime("%Y%m%d")
+    folder_name = "faker_" + datetime.now().strftime("%Y%m%d_%H%M%S")
     os.makedirs(folder_name, exist_ok=True)
 
     control_index = load_control_index()
@@ -194,12 +178,10 @@ if __name__ == "__main__":
         control_index.pop(skip_url, None)
     update_control_index(control_index)
 
-    print_control_status(control_index)
-
+    # Only the tqdm progress bar is shown
     pending_urls = [url for url, status in control_index.items() if status != "DONE"]
     for url in tqdm(pending_urls, desc="Scraping pages"):
         scrape_page(url, folder_name, control_index)
-        print_control_status(control_index)
-        time.sleep(0.5)
+        time.sleep(0.5)  # Polite delay
 
     print(f"Scraping complete. Markdown files saved in folder '{folder_name}'.")

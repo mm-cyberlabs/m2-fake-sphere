@@ -3,6 +3,10 @@ from enum import Enum, auto
 
 from faker import Faker
 
+"""
+TODO: PING Chat GPT to see if access is available.
+"""
+
 
 class FakeDataGenerator:
 

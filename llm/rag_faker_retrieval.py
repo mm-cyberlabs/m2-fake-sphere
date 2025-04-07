@@ -19,7 +19,7 @@ os.environ['HF_HUB_TIMEOUT'] = "60"
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Load all Markdown files
-docs_dir = 'faker_20250331_225454'
+docs_dir = 'faker_20250406_205306'
 docs = []
 doc_paths = [os.path.join(docs_dir, f) for f in os.listdir(docs_dir) if f.endswith('.md')]
 logging.info("Loading markdown files from directory: {}".format(docs_dir))
