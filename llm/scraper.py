@@ -8,13 +8,13 @@ import requests
 from bs4 import BeautifulSoup
 from markdownify import markdownify as md  # Convert HTML to Markdown
 from tqdm import tqdm
+import re  # For cleaning markdown content
 
 # Constants
 CONTROL_FILE = "control_index.json"
-# Array of URLs to avoid crawling
 SKIP_URLS = {"https://faker.readthedocs.io/en/master/genindex.html"}
 
-# Custom headers to mimic a real browser, this will avoid being blocked.
+# Custom headers to mimic a real browser
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
                   "AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -22,26 +22,56 @@ HEADERS = {
 }
 
 
+def clean_markdown(md_text):
+    """
+    Clean markdown content by removing header blocks, table of contents,
+    footer lines, specific navigation elements, and extraneous characters like '¶'.
+    """
+    # Remove header blocks (lines starting with '#' at the beginning)
+    md_text = re.sub(r'^(?:#.*\n)+\n', '', md_text)
+    # Remove sections containing "Table of Contents" or "Navigation"
+    md_text = re.sub(r'(?im)^.*(Table of Contents|Navigation).*\n(?:.*\n)+?(?=\n)', '', md_text)
+    # Remove footer lines that might start with ©
+    md_text = re.sub(r'(?im)^©.*\n', '', md_text)
+
+    # Remove specific navigation elements
+    navigation_patterns = [
+        r'^(Previous topic\s*$)',
+        r'^(Locale en_NZ\s*$)',
+        r'^(Next topic\s*$)',
+        r'^(Locale en_PK\s*$)',
+        r'^(This Page\s*$)',
+        r'^(Show Source\s*$)',
+        r'^(Quick search\s*$)',
+        r'^(Created using Sphinx.*$)',
+    ]
+    for pattern in navigation_patterns:
+        md_text = re.sub(pattern, '', md_text, flags=re.MULTILINE)
+
+    # Remove extraneous pilcrow characters '¶'
+    md_text = md_text.replace("¶", "")
+
+    return md_text
+
+
 def clear_terminal():
-    """
-    Helps visibility on the terminal, to avoid clutter CLI outputs.
-    """
+    """Clear terminal output for cleaner CLI display."""
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def print_control_status(control_index):
-    """Gives status of the scraper in real-time"""
+    """Display the current scraping status."""
     clear_terminal()
     header = "=== Scraper Control Status ==="
     print(header)
     for i, (page, status) in enumerate(control_index.items(), 1):
         print(f"{i:3}. {page} : {status}")
     print("=" * len(header))
-    print()  # Blank line
+    print()
 
 
 def generate_filename(url):
-    """ Generate a safe filename from the URL path"""
+    """Generate a safe filename from the URL path."""
     parsed = urlparse(url)
     path = parsed.path.strip("/").replace("/", "_")
     if not path:
@@ -69,7 +99,6 @@ def crawl_index(url, domain, visited):
     for a in soup.find_all('a', href=True):
         link = a['href']
         abs_link = urljoin(url, link)
-        # Only consider links within the same domain and skip if in SKIP_URLS
         if domain in urlparse(abs_link).netloc and abs_link not in SKIP_URLS:
             urls |= crawl_index(abs_link, domain, visited)
     return urls
@@ -113,9 +142,7 @@ def create_control_index_from_genindex(index_url, domain):
     for a in soup.find_all('a', href=True):
         link = a['href']
         abs_link = urljoin(index_url, link)
-        if domain in urlparse(abs_link).netloc:
-            if abs_link == index_url:
-                continue
+        if domain in urlparse(abs_link).netloc and abs_link != index_url:
             urls.add(abs_link)
     control_index = {url: "PENDING" for url in urls}
     with open(CONTROL_FILE, "w", encoding="utf-8") as f:
@@ -124,7 +151,6 @@ def create_control_index_from_genindex(index_url, domain):
 
 
 def scrape_page(url, output_folder, control_index):
-    # Skip if already processed
     if control_index.get(url) == "DONE":
         return
     try:
@@ -136,49 +162,44 @@ def scrape_page(url, output_folder, control_index):
         print(f"Error retrieving {url}: {e}")
         return
 
-    # Convert the page HTML to Markdown
+    # Convert HTML to Markdown and clean the content
     markdown_content = md(response.text)
+    markdown_content = clean_markdown(markdown_content)
+
     filename = generate_filename(url)
     file_path = os.path.join(output_folder, filename)
 
-    # Write only if file doesn't exist or is not marked DONE
     if not os.path.exists(file_path) or control_index.get(url) != "DONE":
         with open(file_path, "w", encoding="utf-8") as f:
             f.write(f"## Documentation from {url}\n\n")
             f.write(markdown_content)
 
-    # Mark the page as DONE and update the control file
     control_index[url] = "DONE"
     update_control_index(control_index)
 
 
 if __name__ == "__main__":
-    # TODO: make it as a parameter for user's input
     base_url = "https://faker.readthedocs.io/en/master/providers.html"
     genindex_url = "https://faker.readthedocs.io/en/master/genindex.html"
     domain = "faker.readthedocs.io"
 
-    # Create output folder with a datetime stamp (e.g., faker_20230331_235959)
-    folder_name = "faker_" + datetime.now().strftime("%Y%m%d_%H%M%S")
+    folder_name = "faker_" + datetime.now().strftime("%Y%m%d")
     os.makedirs(folder_name, exist_ok=True)
 
-    # Load or create the control index using the genindex page
     control_index = load_control_index()
     if not control_index:
         control_index = create_control_index_from_genindex(genindex_url, domain)
 
-    # Remove any SKIP_URLS from the control index if present
     for skip_url in SKIP_URLS:
         control_index.pop(skip_url, None)
     update_control_index(control_index)
 
     print_control_status(control_index)
 
-    # Process pages that are still pending
     pending_urls = [url for url, status in control_index.items() if status != "DONE"]
     for url in tqdm(pending_urls, desc="Scraping pages"):
         scrape_page(url, folder_name, control_index)
         print_control_status(control_index)
-        time.sleep(0.5)  # Polite delay
+        time.sleep(0.5)
 
     print(f"Scraping complete. Markdown files saved in folder '{folder_name}'.")
