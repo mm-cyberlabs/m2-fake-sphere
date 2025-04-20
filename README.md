@@ -16,7 +16,7 @@
 > and some alteration in our reality occurs.”_
 > <br> — Philip K. Dick, 1977 Metz Sci-Fi Convention
 
-## ♾️ About Fake Sphere
+# ♾️ About Fake Sphere
 
 **Fake Sphere** is a **CLI-first, terminal-native synthetic data engine** built to simulate real-world data interactions across diverse systems — without compromising real data or privacy.
 
@@ -30,7 +30,7 @@ It supports:
 
 ---
 
-### 🎯 Who is this for?
+## 🎯 Who is this for?
 
 Fake Sphere is made for:
 
@@ -51,7 +51,7 @@ Fake Sphere is made for:
 
 ---
 
-## ▓▌ MISSION
+# 🔥 MISSION
 
 > Simulate everything. Feed the system.  
 > Fake Sphere is a CLI-first, terminal-native engine to spawn synthetic data across:
@@ -64,14 +64,13 @@ Fake Sphere is made for:
 
 ---
 
-## **Components**
-## _Intelligence_ 
-## 💿 **Data Scraper & Markdown Converter**: 
+# 🤖 _Intelligence_ 
+## 💿 **Data Scraper & Markdown Converter**
 Scrapes the data from the different documentation and libraries to generate the synthetic data. Microsoft's Markitdown is the chosen for HTML to Markdown converter. This is needed to make LLM fine-tune easier.   
 - _**Scraper: trafilatura**_: [GH Link](https://github.com/adbar/trafilatura) Used as a scraper of the framework documentation. It cleans the HTML from header and footers.
 - _**Markdown Creator: Microsoft Markitdown**_: [GH Link](https://github.com/microsoft/markitdown) MarkItDown is a lightweight Python utility for converting various files to Markdown for use with LLMs and related text analysis pipelines.
 
-## 🥸 **Synthetic Data Models**:
+## 🥸 **Synthetic Data Models**
 - _**Faker & Mimesis**_: contains predefined templates of data with randomization.
 - _**SDV (Synthetic Data Vault)**_: ML-based modeling, trained on probabilistic models of real data. It generates samples similar to real data.
 - _**Scikit-Learn Statistical Distribution for ML**_: uses mathematical functions to generate features, useful for simulating classification, regression and clustering
