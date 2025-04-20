@@ -71,13 +71,16 @@ Scrapes the data from the different documentation and libraries to generate the 
 - _**SDV (Synthetic Data Vault)**_: ML-based modeling, trained on probabilistic models of real data. It generates samples similar to real data.
 - _**Scikit-Learn Statistical Distribution for ML**_: uses mathematical functions to generate features, useful for simulating classification, regression and clustering
 
-| 📚 `Library`  | ⚙️ `Generation Method` | 🎯 `Data Realism` | 🔗 `Structured Relationships` |
-|---------------|------------------------|-------------------|-------------------------------|
-| Faker/Mimesis | Templates + Randomness | LOW-MEDIUM        | ❌                             |
-| SDV           | ML-based Prob. Models  | HIGH              | ✅                             |
-| scikit-learn  | Statistical Simulation | MEDIUM            | ❌                             |
+| 📚 `Library`  | ⚙️ `Generation Method` | 🎯 `Data Realism` | ⫴ `Structured Relationships` | 🔗 `Links`                                                                                                                                                                      |
+|---------------|------------------------|-------------------|------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Faker/Mimesis | Templates + Randomness | LOW-MEDIUM        | ❌                            | [GH FAKER](https://github.com/joke2k/faker)                                                                                                                                     |
+| SDV           | ML-based Prob. Models  | HIGH              | ✅                            | https://sdv.dev ; [GH](https://github.com/sdv-dev/SDV?tab=readme-ov-file); [Rel. Tables](https://colab.research.google.com/drive/1L6i-JhJK9ROG-KFcyzT9G-8FC3L8y8Lc?usp=sharing) |
+| scikit-learn  | Statistical Simulation | MEDIUM            | ❌                            |                                                                                                                                                                                 |
 
-## 🧠 **LLM Fine-Tune with Phi-2** 
+## 🧠 **LLM Fine-Tune with Phi-2**
+
+![fake-tiebreaker-flow](assets/fake-tiebreaker-llm.png)
+
 The llm of choice for a tie-breaker agent is **[Phi-2](https://huggingface.co/microsoft/phi-2)**. Is a 2.7B parameters that easily run in Apple Silicon and have local fast response times.
 
 | `Criteria`                 | `Phi-2 Strength`                                                                                                                                                     |
