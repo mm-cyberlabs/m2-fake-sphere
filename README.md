@@ -16,7 +16,7 @@
 > and some alteration in our reality occurs.”_
 > <br> — Philip K. Dick, 1977 Metz Sci-Fi Convention
 
-# ♾️ About Fake Sphere
+# ♾️ ABOUT FAKE SPHERE
 
 **Fake Sphere** is a **CLI-first, terminal-native synthetic data engine** built to simulate real-world data interactions across diverse systems — without compromising real data or privacy.
 
@@ -60,7 +60,7 @@ Fake Sphere is made for:
 - 📂 Flat files & **data lakes**
 - 🤖 Simulated **agents & behavior flows**
 
-# 🤖 _Intelligence_ 
+# 🤖 INTELLIGENCE  
 ## 💿 **Data Scraper & Markdown Converter**
 Scrapes the data from the different documentation and libraries to generate the synthetic data. Microsoft's Markitdown is the chosen for HTML to Markdown converter. This is needed to make LLM fine-tune easier.   
 - _**Scraper: trafilatura**_: [GH Link](https://github.com/adbar/trafilatura) Used as a scraper of the framework documentation. It cleans the HTML from header and footers.
