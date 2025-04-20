@@ -6,7 +6,7 @@
 
 [//]: # (</div>)
 
----
+
 
 <div style="display: inline-block; padding: 5px;">
   <img src="assets/fake_sphere_app_logo_w_text.png" alt="logo" width="600">
@@ -28,7 +28,7 @@ It supports:
 - 📂 **Files & data lakes** – Populate CSVs, JSONs, or cloud buckets with structured data  
 - 🤖 **Agent flows** – Model personas and behavior for advanced system simulations  
 
----
+
 
 ## 🎯 Who is this for?
 
@@ -49,8 +49,6 @@ Fake Sphere is made for:
   booting FAKE SPHERE 1.0...
 ```
 
----
-
 # 🔥 MISSION
 
 > Simulate everything. Feed the system.  
@@ -61,8 +59,6 @@ Fake Sphere is made for:
 - 🔁 Real-time **streaming platforms**
 - 📂 Flat files & **data lakes**
 - 🤖 Simulated **agents & behavior flows**
-
----
 
 # 🤖 _Intelligence_ 
 ## 💿 **Data Scraper & Markdown Converter**
