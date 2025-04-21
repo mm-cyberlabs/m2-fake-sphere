@@ -8,6 +8,13 @@
 
 
 
+<picture>
+  <source srcset="assets/fake_sphere_app_logo_w_text.png" media="(prefers-color-scheme: light)">
+  <source srcset="assets/fake_sphere_app_logo_w_text_dark.png" media="(prefers-color-scheme: dark)">
+  <img src="assets/fake_sphere_app_logo_w_text.png" alt="logo" width="600">
+</picture>
+
+<br>
 <div style="display: inline-block; padding: 5px;">
   <img src="assets/fake_sphere_app_logo_w_text.png" alt="logo" width="600">
 </div>
