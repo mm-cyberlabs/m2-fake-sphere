@@ -14,10 +14,10 @@
   <img src="assets/fake_sphere_app_logo_w_text.png" alt="logo" width="600">
 </picture>
 
-<br>
-<div style="display: inline-block; padding: 5px;">
-  <img src="assets/fake_sphere_app_logo_w_text.png" alt="logo" width="600">
-</div>
+[//]: # (<br>)
+[//]: # (<div style="display: inline-block; padding: 5px;">)
+[//]: # (  <img src="assets/fake_sphere_app_logo_w_text.png" alt="logo" width="600">)
+[//]: # (</div>)
 
 > _“We are living in a computer-programmed reality, and the only clue we have to it is when some variable is changed,
 > and some alteration in our reality occurs.”_
