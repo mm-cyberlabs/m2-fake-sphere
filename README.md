@@ -84,7 +84,13 @@ Scrapes the data from the different documentation and libraries to generate the 
 
 ## 🧠 **LLM Fine-Tune with Phi-2**
 
-![fake-tiebreaker-flow](assets/fake-tiebreaker-llm.png)
+[//]: # (![fake-tiebreaker-flow]&#40;assets/fake-tiebreaker-llm.png&#41;)
+
+<picture>
+  <source srcset="assets/fake-tiebreaker-llm.png" media="(prefers-color-scheme: light)">
+  <source srcset="assets/fake-tiebreaker-llm_dark.png" media="(prefers-color-scheme: dark)">
+  <img src="assets/fake_sphere_app_logo_w_text.png" alt="logo" width="600">
+</picture>
 
 The llm of choice for a tie-breaker agent is **[Phi-2](https://huggingface.co/microsoft/phi-2)**. Is a 2.7B parameters that easily run in Apple Silicon and have local fast response times.
 
