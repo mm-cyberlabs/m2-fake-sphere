@@ -1,0 +1,17 @@
+{
+  "database": {
+    "host": "localhost",
+    "port": 5432,
+    "database": "your_database_name",
+    "user": "your_username",
+    "password": ""
+  },
+  "selected_schemas": [
+    "public"
+  ],
+  "output": {
+    "file_path": "database_structure.json",
+    "pretty_print": true,
+    "max_depth": 3
+  }
+}
