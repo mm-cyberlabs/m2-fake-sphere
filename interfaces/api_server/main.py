@@ -205,14 +205,15 @@ def main():
     print("🚀 Starting Fake Sphere API Server...")
     print("📡 WebSocket support enabled")
     print("🌐 CORS enabled for development")
-    print("🔗 Available at: http://localhost:5000")
-    print("📊 API Documentation: http://localhost:5000/api/health")
+    port = int(os.getenv('PORT', 5000))
+    print(f"🔗 Available at: http://localhost:{port}")
+    print(f"📊 API Documentation: http://localhost:{port}/api/health")
     
     # Run the server
     socketio.run(
         app, 
         host='0.0.0.0', 
-        port=5000, 
+        port=int(os.getenv('PORT', 5000)), 
         debug=True,
         allow_unsafe_werkzeug=True  # For development only
     )
